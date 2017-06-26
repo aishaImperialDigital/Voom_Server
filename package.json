@@ -1,0 +1,27 @@
+{
+  "name": "package",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  // package.json
+  "scripts": {
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "voom_server"
+  },
+  "keywords": [
+    "voom"
+  ],
+  "author": "Aisha",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "mongodb": "^2.2.29"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
