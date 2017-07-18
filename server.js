@@ -8,7 +8,7 @@ const port = 8000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-var url = "mongodb://localhost:27017/voomdb";
+var url = "mongodb://voomdb:voomdb@ds163232.mlab.com:63232/voomdb";
 
 MongoClient.connect(url, (err, database) => {
   if (err) return console.log(err)
