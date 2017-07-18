@@ -1,3 +1,3 @@
 module.exports = {
-  url : "mongodb://localhost:27017/voomdb"
+  url : "mongodb://voomdb:voomdb@ds163232.mlab.com:63232/voomdb"
 }
