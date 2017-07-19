@@ -13,9 +13,6 @@ var url = "mongodb://voomdb:voomdb@ds163232.mlab.com:63232/voomdb";
 MongoClient.connect(url, (err, database) => {
   if (err) return console.log(err)
   require('./app/routes')(app, database);
-
-  app.use(express.static(__dirname + '/public')); // set the static files location /public/img will be /img for users
-
   app.listen(port, () => {
     console.log('We are live on ' + port);
   });
