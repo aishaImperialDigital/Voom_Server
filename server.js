@@ -8,7 +8,7 @@ const port = 8000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/Public"));
-
+var User = require('./app/models/user');
 var url = "mongodb://voomdb:voomdb@ds163232.mlab.com:63232/voomdb";
 mongoose.connect(url);
 MongoClient.connect(url, (err, database) => {
