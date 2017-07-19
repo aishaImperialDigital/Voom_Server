@@ -12,9 +12,7 @@
 //   });
 // };
 //the simple example of login//
-module.exports = function(app, db) {
-  app.post('/user', (req, res) => {
-    router.post('/users/login', function (req, res) {
+router.post('/users/login', function (req, res) {
             var users = req.app;
             var email = req.body.email;
             var password = req.body.password;
@@ -32,8 +30,7 @@ module.exports = function(app, db) {
                 res.json({status: 0, msg: "Invalid Fields"});
             }
         });
-      });
-    };
+
     //and if you have to create schema
 
  var db_schema = new Schema({
