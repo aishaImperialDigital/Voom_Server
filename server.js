@@ -15,11 +15,11 @@ MongoClient.connect(url, (err, database) => {
   require('./app/routes')(app, database);
 
   app.use(express.static(__dirname + '/public')); // set the static files location /public/img will be /img for users
-  
-  //load up index file
-  app.get('/', function(req, res){
-      res.render('index.html');
-  });
+
+  // //load up index file
+  // app.get('/', function(req, res){
+  //     res.render('index.html');
+  // });
 
   app.listen(port, () => {
     console.log('We are live on ' + port);
