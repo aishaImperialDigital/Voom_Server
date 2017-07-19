@@ -32,7 +32,8 @@ module.exports = function(app, db) {
                 res.json({status: 0, msg: "Invalid Fields"});
             }
         });
-
+      });
+    });
     //and if you have to create schema
 
  var db_schema = new Schema({
