@@ -9,7 +9,8 @@ const port = 8000;
 app.use(bodyParser.urlencoded({ extended: true }));
 
 var url = "mongodb://voomdb:voomdb@ds163232.mlab.com:63232/voomdb";
-
+var mongoose = require('mongoose');
+mongoose.connect(url);
 MongoClient.connect(url, (err, database) => {
   if (err) return console.log(err)
   require('./app/routes')(app, database);
