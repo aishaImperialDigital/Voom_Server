@@ -7,6 +7,7 @@
 module.exports = function(app, db) {
   app.post('/user', (req, res) => {
 
+   var User = require('./app/models/user');
     // create a new user called chris
     var chris = new User({
       name: 'Chris',
