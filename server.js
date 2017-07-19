@@ -7,7 +7,7 @@ const app            = express();
 const port = 8000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(__dirname + "/../public"));
+app.use(express.static(__dirname + "/Public"));
 
 var url = "mongodb://voomdb:voomdb@ds163232.mlab.com:63232/voomdb";
 
