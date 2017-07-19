@@ -1,26 +1,19 @@
-var express  = require('express');
-var app      = express(); 								// create our app w/ express
-var mongoose = require('mongoose'); 					// mongoose for mongodb
-var port  	 = process.env.PORT || 8082; 				// set the port
-var database = require('./config/db'); 			// load the database config
+// server.js
+const express        = require('express');
+const MongoClient    = require('mongodb').MongoClient;
+const bodyParser     = require('body-parser');
+const app            = express();
 
-//var morgan = require('morgan'); 		// log requests to the console (express4)
-var bodyParser = require('body-parser'); 	// pull information from HTML POST (express4)
-//var methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
+const port = 8000;
 
-// configuration ===============================================================
-mongoose.connect(database.url); 	// connect to mongoDB database on modulus.io
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(express.static(__dirname + '/public')); 				// set the static files location /public/img will be /img for users
-//app.use(morgan('dev')); 										// log every request to the console
-app.use(bodyParser.urlencoded({'extended':'true'})); 			// parse application/x-www-form-urlencoded
-app.use(bodyParser.json()); 									// parse application/json
-app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
-//app.use(methodOverride());
+var url = "mongodb://voomdb:voomdb@ds163232.mlab.com:63232/voomdb";
 
-// routes ======================================================================
-require('./app/routes.js')(app);
-
-// listen (start app with node server.js) ======================================
-app.listen(port);
-console.log("App listening on port " + port);
+MongoClient.connect(url, (err, database) => {
+  if (err) return console.log(err)
+  require('./app/routes')(app, database);
+  app.listen(port, () => {
+    console.log('We are live on ' + port);
+  });
+})
