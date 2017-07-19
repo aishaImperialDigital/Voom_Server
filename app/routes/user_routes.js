@@ -1,12 +1,12 @@
 //user_routes.js
 
 // if our user.js file is at app/models/user.js
-var User = require('./app/models/user');
+
 
 
 module.exports = function(app, db) {
   app.post('/user', (req, res) => {
-
+  var User = require('./app/models/user');
     // create a new user called chris
     var chris = new User({
       name: 'Chris',
@@ -20,7 +20,7 @@ module.exports = function(app, db) {
 
       console.log('User saved successfully!');
     });
-    
+
     const user = { email: req.body.email, password: req.body.password };
     db.collection('user').insert(user, (err, result) => {
       if (err) {
