@@ -15,7 +15,7 @@ MongoClient.connect(url, (err, database) => {
   require('./app/routes')(app, database);
 
   app.use(express.static(__dirname + '/public')); // set the static files location /public/img will be /img for users
-  app.engine('html', require('ejs').renderFile);
+  
 
   //load up index file
   app.get('/', function(req, res){
