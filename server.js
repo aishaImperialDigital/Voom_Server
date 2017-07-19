@@ -8,8 +8,22 @@ const port = 8000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/Public"));
-var User = require('./app/models/user');
 var url = "mongodb://voomdb:voomdb@ds163232.mlab.com:63232/voomdb";
+var User = require('./app/models/user');
+ // create a new user called chris
+ var chris = new User({
+   name: 'Chris',
+   username: 'sevilayha',
+   password: 'password'
+ });
+
+ // call the built-in save method to save to the database
+ chris.save(function(err) {
+   if (err) throw err;
+
+   console.log('User saved successfully!');
+ });
+
 mongoose.connect(url);
 MongoClient.connect(url, (err, database) => {
   if (err) return console.log(err)
