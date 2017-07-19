@@ -33,7 +33,7 @@ module.exports = function(app, db) {
             }
         });
       });
-    });
+    };
     //and if you have to create schema
 
  var db_schema = new Schema({
