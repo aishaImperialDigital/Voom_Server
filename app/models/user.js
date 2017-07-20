@@ -25,16 +25,14 @@ var UserSchema = new Schema({
 });
 //hashing a password before saving it to the database
 UserSchema.pre('save', function (next) {
-    var self = this;
-
-    if (!self.isModified('passHash')) return next();
-
-    bcrypt.hash(self.passHash, SALT_WORK_FACTOR, null, function encryptedPassword (err, hash) {
-        if(err) console.log(err);
-
-        self.passHash = hash;
-        next();
-    });
+  var user = this;
+  bcrypt.hash(user.password, 10, function (err, hash){
+    if (err) {
+      return next(err);
+    }
+    user.password = hash;
+    next();
+  })
 });
 
 module.exports = mongoose.model('Users', UserSchema);
