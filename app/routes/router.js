@@ -8,12 +8,12 @@ var User = require('../models/user');
 */
 var nodemailer = require('nodemailer');
 var smtpTransport = require('nodemailer-smtp-transport');
-var transport = nodemailer.createTransport(smtpTransport({
-    service: 'Gmail',
-    auth:{
-        xoauth2: xoauth2.createXOAuth2Generator({
-          user: "imperialdigital02@gmail.com",
-          pass: "Imperial01!!"
+var transport = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            type: 'OAuth2',
+            user: "imperialdigital02@gmail.com",
+            pass: "Imperial01!!"
 
 // var smtpTransport = nodemailer.createTransport("SMTP",{
 //     service: "Gmail",
