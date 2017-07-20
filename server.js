@@ -107,7 +107,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/templateLogReg'));
 
 // include routes
-var routes = require('.app/routes/router');
+var routes = require('./app/routes/router');
 app.use('/', routes);
 
 // catch 404 and forward to error handler
