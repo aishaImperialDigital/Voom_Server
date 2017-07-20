@@ -24,7 +24,7 @@ var UserSchema = new Schema({
 
 });
 //hashing a password before saving it to the database
-schema.pre('save', function (next) {
+UserSchema.pre('save', function (next) {
     var self = this;
 
     if (!self.isModified('passHash')) return next();
