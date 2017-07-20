@@ -1,45 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
-
-/*
-    Here we are configuring our SMTP Server details.
-    STMP is mail server which is responsible for sending and recieving email.
-*/
-// var nodemailer = require('nodemailer');
-// var smtpTransport = require('nodemailer-smtp-transport');
-// var transport = nodemailer.createTransport({
-//         service: 'Gmail',
-//         auth: {
-//             type: 'OAuth2',
-//             user: "imperialdigital02@gmail.com",
-//             pass: "Imperial01!!"
-//
-// // var smtpTransport = nodemailer.createTransport("SMTP",{
-// //     service: "Gmail",
-// //     auth: {
-// //         user: "imperialdigital02@gmail.com",
-// //         pass: "Imperial01!!"
-//     }
-// });
-// var rand,mailOptions,host,link;
-
-
-// var nodemailer = require('nodemailer');
-// var smtpTransport = require('nodemailer-smtp-transport');
-//
-// var transporter = nodemailer.createTransport(smtpTransport({
-//    host: 'smtp.gmail.com',
-//    port: '465',
-//    secure: true,
-//    auth: {
-//        user: 'imperialdigital02@gmail.com',
-//        pass: 'Imperial01!!'
-//    }
-// }));
-/*------------------SMTP Over-----------------------------*/
-
-
 // GET route for reading data
 router.get('/', function (req, res, next) {
   return res.sendFile(path.join(__dirname + '/templateLogReg/index.html'));
@@ -149,9 +110,7 @@ router.get('/send',function(req,res){
 //          }
 // });
 var mailer = require("nodemailer");
-
 // Use Smtp Protocol to send Email
-
 var smtpTransport = mailer.createTransport({
        service: 'Gmail',
        auth: {
@@ -159,29 +118,25 @@ var smtpTransport = mailer.createTransport({
            pass: 'Imperial01!!' // Your password
        }
    });
-// var smtpTransport = mailer.createTransport("SMTP",{
-//     service: "Gmail",
-//     auth: {
-//         user: "imperialdigital02@gmail.com",
-//         pass: "Imperial01!!"
-//     }
-// });
 
-var mail = {
-    from: "imperial <imperialdigital02@gmail.com>",
-    to: "aisha@imperialdigital.co.nz",
-    subject: "Send Email Using Node.js",
-    text: "Node.js New world for me",
-    html: "<b>Node.js New world for me</b>"
-}
-
-smtpTransport.sendMail(mail, function(error, response){
-    if(error){
-        console.log(error);
-    }else{
-        console.log("Message sent: " + response.message);
-    }
-
+   rand=Math.floor((Math.random() * 100) + 54);
+       host=req.get('host');
+       link="http://"+req.get('host')+"/verify?id="+rand;
+       mailOptions={
+           from: 'imperialdigital02@gmail.com', // sender address
+           to : "aisha@imperialdigital.co.nz",//req.query.to,
+           subject : "Please confirm your Email account",
+           html : "Hello,<br> Please Click on the link to verify your email.<br><a href="+link+">Click here to verify</a>"
+       }
+       console.log(mailOptions);
+smtpTransport.sendMail(mailOptions, function(error, response){
+  if(error){
+              console.log(error);
+          res.end("error");
+       }else{
+              console.log("Message sent: " + response.message);
+          res.end("sent");
+           }
     smtpTransport.close();
 });
 });
