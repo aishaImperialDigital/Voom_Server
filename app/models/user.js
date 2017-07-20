@@ -1,24 +1,25 @@
-'use strict';
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-
-
-var UserSchema = new Schema({
-  name: {
+var UserSchema = new mongoose.Schema({
+  email: {
     type: String,
-    Required: 'Kindly enter the name of the user'
+    unique: true,
+    required: true,
+    trim: true
   },
-  Created_date: {
-    type: Date,
-    default: Date.now
+  username: {
+    type: String,
+    unique: true,
+    required: true,
+    trim: true
   },
-  status: {
-    type: [{
-      type: String,
-      enum: ['pending', 'ongoing', 'completed']
-    }],
-    default: ['pending']
+  password: {
+    type: String,
+    required: true,
+  },
+  passwordConf: {
+    type: String,
+    required: true,
   }
 });
-
-module.exports = mongoose.model('Users', UserSchema);
+var User = mongoose.model('User', UserSchema);
+module.exports = User;
