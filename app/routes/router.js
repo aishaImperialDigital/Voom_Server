@@ -7,11 +7,11 @@ var User = require('../models/user');
     STMP is mail server which is responsible for sending and recieving email.
 */
 var nodemailer = require('nodemailer');
-var smtpTransport = require('nodemailer-smtp-transport');
-var transport = nodemailer.createTransport({
-        service: 'Gmail',
-        auth: {
-            type: 'OAuth2',
+//var smtpTransport = require('nodemailer-smtp-transport');
+// create reusable transporter object using SMTP transport
+var smtpTransport = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
             user: "imperialdigital02@gmail.com",
             pass: "Imperial01!!"
 
