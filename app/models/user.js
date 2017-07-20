@@ -1,7 +1,7 @@
 'use strict';
 var mongoose = require('mongoose'),
     validate = require('mongoose-validate'),
-    bcrypt   = require('bcrypt-nodejs'),
+    bcrypt   = require('bcrypt'),
     SALT_WORK_FACTOR = 10,
     REQUIRED_PASSWORD_LENGTH = 8;
 
@@ -21,7 +21,6 @@ var UserSchema = new Schema({
     required: true,
     validate: [validateStringLength, 'The password must be of min ' + REQUIRED_PASSWORD_LENGTH + ' characters length.']
   }
-
 });
 //hashing a password before saving it to the database
 UserSchema.pre('save', function (next) {
