@@ -33,7 +33,7 @@
 
 var express = require('express'),
   app = express(),
-  port = process.env.PORT || 3000,
+  port = process.env.PORT || 8000,
   mongoose = require('mongoose'),
   User = require('./app/models/user'),
   bodyParser = require('body-parser');
@@ -46,7 +46,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 
-var routes = require('./api/routes/user_routes');
+var routes = require('./app/routes/user_routes');
 routes(app);
 
 
