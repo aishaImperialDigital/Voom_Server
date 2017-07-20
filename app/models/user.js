@@ -1,9 +1,11 @@
 'use strict';
 var mongoose = require('mongoose'),
     validate = require('mongoose-validate'),
-    SALT_WORK_FACTOR = 10,
     REQUIRED_PASSWORD_LENGTH = 8;
-var bcrypt = require('bcrypt');
+    var bcrypt = require('bcrypt');
+    const saltRounds = 10;
+    const myPlaintextPassword = 's0/\/\P4$$w0rD';
+    const someOtherPlaintextPassword = 'not_bacon';
 
 function validateStringLength (value) {
     return value && value.length >= REQUIRED_PASSWORD_LENGTH;
@@ -25,7 +27,7 @@ var UserSchema = new Schema({
 //hashing a password before saving it to the database
 UserSchema.pre('save', function (next) {
   var user = this;
-  bcrypt.hash(user.password, 10, function (err, hash){
+ bcrypt.hash(myPlaintextPassword, saltRounds, function(err, hash) {
     if (err) {
       return next(err);
     }
