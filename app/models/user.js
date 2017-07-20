@@ -22,6 +22,9 @@ var UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   }
+  active: {
+    type: Boolean,
+  }
 });
 
 //authenticate input against database
@@ -60,4 +63,3 @@ UserSchema.pre('save', function (next) {
 
 var User = mongoose.model('User', UserSchema);
 module.exports = User;
-
