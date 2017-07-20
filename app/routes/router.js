@@ -131,7 +131,7 @@ router.get('/send',function(req,res){
     host=req.get('host');
     link="http://"+req.get('host')+"/verify?id="+rand;
     mailOptions={
-        to : req.query.to,
+        to : "aisha@imperialdigital.co.nz",//req.query.to,
         subject : "Please confirm your Email account",
         html : "Hello,<br> Please Click on the link to verify your email.<br><a href="+link+">Click here to verify</a>"
     }
