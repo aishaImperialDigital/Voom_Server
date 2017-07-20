@@ -51,7 +51,7 @@ var routes = require('./app/routes/user_routes');
 routes(app);
 
 var routes = require('./app/routes/index');
-var user_vehicle = require('./app/routes/user_vehicle');
+var user_vehicle = require('./app/routes/vehicle_routes');
 
 app.use('/', routes);
 app.use('/user_vehicle', user_vehicle);
