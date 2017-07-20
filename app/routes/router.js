@@ -1,17 +1,25 @@
 var express = require('express');
 var router = express.Router();
-var nodemailer = require("nodemailer");
 var User = require('../models/user');
 
 /*
     Here we are configuring our SMTP Server details.
     STMP is mail server which is responsible for sending and recieving email.
 */
-var smtpTransport = nodemailer.createTransport("SMTP",{
-    service: "Gmail",
-    auth: {
-        user: "imperialdigital02@gmail.com",
-        pass: "Imperial01!!"
+var nodemailer = require('nodemailer');
+var smtpTransport = require('nodemailer-smtp-transport');
+var transport = nodemailer.createTransport(smtpTransport({
+    service: 'Gmail',
+    auth:{
+        xoauth2: xoauth2.createXOAuth2Generator({
+          user: "imperialdigital02@gmail.com",
+          pass: "Imperial01!!"
+
+// var smtpTransport = nodemailer.createTransport("SMTP",{
+//     service: "Gmail",
+//     auth: {
+//         user: "imperialdigital02@gmail.com",
+//         pass: "Imperial01!!"
     }
 });
 var rand,mailOptions,host,link;
@@ -51,7 +59,7 @@ router.post('/', function (req, res, next) {
         return next(error);
       } else {
         req.session.userId = user._id;
-        
+
         return res.redirect('/profile');
       }
     });
