@@ -47,9 +47,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 
-var routes = require('./app/routes/index');
+var routes = require('./app/routes/user_routes');
 routes(app);
 
+var routes = require('./routes/index');
+var user_vehicle = require('./routes/user_vehicle');
+
+app.use('/', routes);
+app.use('/user_vehicle', user_vehicle);
 
 app.listen(port);
 
