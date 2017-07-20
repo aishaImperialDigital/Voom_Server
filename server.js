@@ -30,7 +30,8 @@
 //     console.log('We are live on ' + port);
 //   });
 // })
-var session = require('express-session')
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 var express = require('express'),
   app = express(),
   port = process.env.PORT || 8000,
@@ -56,10 +57,42 @@ app.use(function(req, res) {
   res.status(404).send({url: req.originalUrl + ' not found'})
 });
 //use sessions for tracking logins
+//use sessions for tracking logins
 app.use(session({
   secret: 'work hard',
   resave: true,
-  saveUninitialized: false
+  saveUninitialized: false,
+  store: new MongoStore({
+    mongooseConnection: db
+  })
 }));
+
+function requiresLogin(req, res, next) {
+  if (req.session && req.session.userId) {
+    return next();
+  } else {
+    var err = new Error('You must be logged in to view this page.');
+    err.status = 401;
+    return next(err);
+  }
+}
+router.get('/profile', mid.requiresLogin, function(req, res, next) {
+  //...
+});
+// GET /logout
+router.get('/logout', function(req, res, next) {
+  if (req.session) {
+    // delete session object
+    req.session.destroy(function(err) {
+      if(err) {
+        return next(err);
+      } else {
+        return res.redirect('/');
+      }
+    });
+  }
+});
+
+
 
 console.log('user RESTful API server started on: ' + port);
