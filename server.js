@@ -30,48 +30,102 @@
 //     console.log('We are live on ' + port);
 //   });
 // })
-const session = require('express-session');
-const MongoStore = require('connect-mongo')(session);
-var express = require('express'),
-  app = express(),
-  port = process.env.PORT || 8000,
-  mongoose = require('mongoose'),
-  User = require('./app/models/user'),
-  bodyParser = require('body-parser');
 
-mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://voomdb:voomdb@ds163232.mlab.com:63232/voomdb');
+///////////// end
+// const session = require('express-session');
+// const MongoStore = require('connect-mongo')(session);
+// var express = require('express'),
+//   app = express(),
+//   port = process.env.PORT || 8000,
+//   mongoose = require('mongoose'),
+//   User = require('./app/models/user'),
+//   bodyParser = require('body-parser');
+//
+// mongoose.Promise = global.Promise;
+// mongoose.connect('mongodb://voomdb:voomdb@ds163232.mlab.com:63232/voomdb');
+//
+//
+// app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.json());
+//
+//
+// var routes = require('./app/routes/user_routes');
+// routes(app);
+//
+// app.listen(port);
+//
+// app.use(function(req, res) {
+//   res.status(404).send({url: req.originalUrl + ' not found'})
+// });
+// //use sessions for tracking logins
+// //use sessions for tracking logins
+// app.use(session({
+//   secret: 'work hard',
+//   resave: true,
+//   saveUninitialized: false,
+//   store: new MongoStore({
+//     mongooseConnection: mongoose.connection,
+//     touchAfter: 24 * 3600 // time period in seconds
+//   })
+// }));
+//
+//
+// console.log('user RESTful API server started on: ' + port);
+var express = require('express');
+var app = express();
+var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
 
+//connect to MongoDB
+mongoose.connect('mongodb://localhost/testForAuth');
+var db = mongoose.connection;
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
-
-var routes = require('./app/routes/user_routes');
-routes(app);
-
-var routes = require('./app/routes/index');
-var user_vehicle = require('./app/routes/vehicle_routes');
-
-app.use('/', routes);
-app.use('/user_vehicle', user_vehicle);
-
-app.listen(port);
-
-app.use(function(req, res) {
-  res.status(404).send({url: req.originalUrl + ' not found'})
+//handle mongo error
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function () {
+  // we're connected!
 });
-//use sessions for tracking logins
+
 //use sessions for tracking logins
 app.use(session({
   secret: 'work hard',
   resave: true,
   saveUninitialized: false,
   store: new MongoStore({
-    mongooseConnection: mongoose.connection,
-    touchAfter: 24 * 3600 // time period in seconds
+    mongooseConnection: db
   })
 }));
 
+// parse incoming requests
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
-console.log('user RESTful API server started on: ' + port);
+
+// serve static files from template
+app.use(express.static(__dirname + '/templateLogReg'));
+
+// include routes
+var routes = require('./routes/router');
+app.use('/', routes);
+
+// catch 404 and forward to error handler
+app.use(function (req, res, next) {
+  var err = new Error('File Not Found');
+  err.status = 404;
+  next(err);
+});
+
+// error handler
+// define as the last app.use callback
+app.use(function (err, req, res, next) {
+  res.status(err.status || 500);
+  res.send(err.message);
+});
+
+
+// listen on port 3000
+app.listen(8000, function () {
+  console.log('Express app listening on port 3000');
+});

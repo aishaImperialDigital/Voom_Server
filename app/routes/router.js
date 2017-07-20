@@ -1,16 +1,3 @@
-// // user_routes.js
-// module.exports = function(app, db) {
-//   app.post('/vehicle', (req, res) => {
-//     const user = { email: req.body.email, password: req.body.password };
-//     db.collection('user').insert(user, (err, result) => {
-//       if (err) {
-//         res.send({ 'error': 'An error has occurred' });
-//       } else {
-//         res.send(result.ops[0]);
-//       }
-//     });
-//   });
-// };
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
@@ -18,7 +5,7 @@ var User = require('../models/user');
 
 // GET route for reading data
 router.get('/', function (req, res, next) {
-  return res.sendFile(path.join(__dirname + '/Public/index.html'));
+  return res.sendFile(path.join(__dirname + '/templateLogReg/index.html'));
 });
 
 
