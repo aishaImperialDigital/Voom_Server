@@ -24,6 +24,7 @@ var UserSchema = new mongoose.Schema({
   }
   active: {
     type: Boolean,
+    required: false,
   }
 });
 
