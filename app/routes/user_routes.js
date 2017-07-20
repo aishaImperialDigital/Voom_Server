@@ -8,7 +8,7 @@ module.exports = function(app, db) {
         res.send({ 'error': 'An error has occurred' });
       } else {
         res.send(result.ops[0]);
-        var User = require('./app/models/user');
+        var User = require('./app/models/user.js');
          // create a new user called chris
          var chris = new User({
            name: 'Chrccisff',
