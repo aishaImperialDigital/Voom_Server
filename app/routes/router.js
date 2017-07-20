@@ -155,8 +155,8 @@ var mailer = require("nodemailer");
 var smtpTransport = mailer.createTransport({
        service: 'Gmail',
        auth: {
-           user: 'imperialdigital02@gmail.com', // Your email id
-           pass: 'Imperial01!!' // Your password
+           user: 'aishahanifraja@gmail.com', // Your email id
+           pass: '123456abcdEFGH' // Your password
        }
    });
 // var smtpTransport = mailer.createTransport("SMTP",{
@@ -168,7 +168,7 @@ var smtpTransport = mailer.createTransport({
 // });
 
 var mail = {
-    from: "imperial <imperialdigital02@gmail.com>",
+    from: "imperial <aishahanifraja@gmail.com>",
     to: "aisha@imperialdigital.co.nz",
     subject: "Send Email Using Node.js",
     text: "Node.js New world for me",
