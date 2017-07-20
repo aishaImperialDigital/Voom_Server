@@ -23,9 +23,6 @@ var UserSchema = new Schema({
   }
 
 });
-
-module.exports = mongoose.model('Users', UserSchema);
-
 //hashing a password before saving it to the database
 schema.pre('save', function (next) {
     var self = this;
@@ -39,3 +36,5 @@ schema.pre('save', function (next) {
         next();
     });
 });
+
+module.exports = mongoose.model('Users', UserSchema);
