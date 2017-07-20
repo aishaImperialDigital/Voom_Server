@@ -151,13 +151,21 @@ router.get('/send',function(req,res){
 var mailer = require("nodemailer");
 
 // Use Smtp Protocol to send Email
-var smtpTransport = mailer.createTransport("SMTP",{
-    service: "Gmail",
-    auth: {
-        user: "imperialdigital02@gmail.com",
-        pass: "Imperial01!!"
-    }
-});
+
+var smtpTransport = mailer.createTransport({
+       service: 'Gmail',
+       auth: {
+           user: 'imperialdigital02@gmail.com', // Your email id
+           pass: 'Imperial01!!' // Your password
+       }
+   });
+// var smtpTransport = mailer.createTransport("SMTP",{
+//     service: "Gmail",
+//     auth: {
+//         user: "imperialdigital02@gmail.com",
+//         pass: "Imperial01!!"
+//     }
+// });
 
 var mail = {
     from: "imperial <imperialdigital02@gmail.com>",
