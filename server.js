@@ -30,7 +30,7 @@
 //     console.log('We are live on ' + port);
 //   });
 // })
-
+var session = require('express-session')
 var express = require('express'),
   app = express(),
   port = process.env.PORT || 8000,
@@ -55,5 +55,11 @@ app.listen(port);
 app.use(function(req, res) {
   res.status(404).send({url: req.originalUrl + ' not found'})
 });
+//use sessions for tracking logins
+app.use(session({
+  secret: 'work hard',
+  resave: true,
+  saveUninitialized: false
+}));
 
 console.log('user RESTful API server started on: ' + port);
