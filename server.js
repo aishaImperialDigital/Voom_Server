@@ -50,6 +50,9 @@ app.use(bodyParser.json());
 var routes = require('./app/routes/user_routes');
 routes(app);
 
+var routes = require('.app/routes/router');
+app.use('/', routes);
+
 
 app.listen(port);
 
@@ -63,7 +66,8 @@ app.use(session({
   resave: true,
   saveUninitialized: false,
   store: new MongoStore({
-    mongooseConnection: mongoose.connection
+    mongooseConnection: mongoose.connection,
+    touchAfter: 24 * 3600 // time period in seconds
   })
 }));
 
