@@ -29,7 +29,7 @@ img{max-width:100%;}
 /*--end reset--*/
 body {
     font-family: 'Jura', sans-serif;
-    background:#0a4981;
+    background:#0a4988;
 }
 h1 {
     color: #fff;
@@ -115,7 +115,7 @@ h1 {
     background: #0b4379;
     box-shadow: 0px 2px 1px rgba(28, 28, 29, 0.42);
 	border-radius: 22px;
-	
+
 }
 .signin-form input[type="submit"]:hover {
     color: #fff;
