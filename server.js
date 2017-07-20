@@ -47,7 +47,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 
-var routes = require('./app/routes/user_routes');
+var routes = require('./app/routes/index');
 routes(app);
 
 
