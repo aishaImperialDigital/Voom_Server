@@ -127,5 +127,5 @@ app.use(function (err, req, res, next) {
 
 // listen on port 3000
 app.listen(8002, function () {
-  console.log('Express app listening on port 3000');
+  console.log('Express app listening on port 8002');
 });

@@ -6,23 +6,35 @@ var User = require('../models/user');
     Here we are configuring our SMTP Server details.
     STMP is mail server which is responsible for sending and recieving email.
 */
-var nodemailer = require('nodemailer');
-//var smtpTransport = require('nodemailer-smtp-transport');
-// create reusable transporter object using SMTP transport
-var smtpTransport = nodemailer.createTransport({
-    service: 'Gmail',
-    auth: {
-            user: "imperialdigital02@gmail.com",
-            pass: "Imperial01!!"
+// var nodemailer = require('nodemailer');
+// var smtpTransport = require('nodemailer-smtp-transport');
+// var transport = nodemailer.createTransport({
+//         service: 'Gmail',
+//         auth: {
+//             type: 'OAuth2',
+//             user: "imperialdigital02@gmail.com",
+//             pass: "Imperial01!!"
+//
+// // var smtpTransport = nodemailer.createTransport("SMTP",{
+// //     service: "Gmail",
+// //     auth: {
+// //         user: "imperialdigital02@gmail.com",
+// //         pass: "Imperial01!!"
+//     }
+// });
+// var rand,mailOptions,host,link;
 
-// var smtpTransport = nodemailer.createTransport("SMTP",{
-//     service: "Gmail",
-//     auth: {
-//         user: "imperialdigital02@gmail.com",
-//         pass: "Imperial01!!"
-    }
-});
-var rand,mailOptions,host,link;
+
+var nodemailer = require('nodemailer');
+var smtpTransport = require('nodemailer-smtp-transport');
+
+var transporter = nodemailer.createTransport(smtpTransport({
+   service: 'Gmail',
+   auth: {
+       user: 'imperialdigital02@gmail.com',
+       pass: 'Imperial01!!'
+   }
+}));
 /*------------------SMTP Over-----------------------------*/
 
 
@@ -124,7 +136,7 @@ router.get('/send',function(req,res){
         html : "Hello,<br> Please Click on the link to verify your email.<br><a href="+link+">Click here to verify</a>"
     }
     console.log(mailOptions);
-    smtpTransport.sendMail(mailOptions, function(error, response){
+    transporter.sendMail(mailOptions, function(error, response){
      if(error){
             console.log(error);
         res.end("error");
