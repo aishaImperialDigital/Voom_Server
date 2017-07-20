@@ -79,7 +79,7 @@ var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 
 //connect to MongoDB
-mongoose.connect('mongodb://localhost/testForAuth');
+mongoose.connect('mongodb://voomdb:voomdb@ds163232.mlab.com:63232/voomdb');
 var db = mongoose.connection;
 
 //handle mongo error
