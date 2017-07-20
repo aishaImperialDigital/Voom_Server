@@ -1,25 +1,24 @@
-// grab the things we need
+'use strict';
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-// create a schema
-var userSchema = new Schema({
-  name: String,
-  username: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-  admin: Boolean,
-  location: String,
-  meta: {
-    age: Number,
-    website: String
+
+var UserSchema = new Schema({
+  name: {
+    type: String,
+    Required: 'Kindly enter the name of the user'
   },
-  created_at: Date,
-  updated_at: Date
+  Created_date: {
+    type: Date,
+    default: Date.now
+  },
+  status: {
+    type: [{
+      type: String,
+      enum: ['pending', 'ongoing', 'completed']
+    }],
+    default: ['pending']
+  }
 });
 
-// the schema is useless so far
-// we need to create a model using it
-var User = mongoose.model('User', userSchema);
-
-// make this available to our users in our Node applications
-module.exports = User;
+module.exports = mongoose.model('Users', UserSchema);
