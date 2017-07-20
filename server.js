@@ -50,9 +50,6 @@ app.use(bodyParser.json());
 var routes = require('./app/routes/user_routes');
 routes(app);
 
-var routes = require('.app/routes/router');
-app.use('/', routes);
-
 
 app.listen(port);
 
