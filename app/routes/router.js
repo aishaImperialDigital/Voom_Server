@@ -113,7 +113,7 @@ var smtpTransport = mailer.createTransport({
        host=req.get('host');
        link="http://"+req.get('host')+"/verify?id="+rand;
        //
-       var toEmail = ""
+       var toEmail ='';
        User.findById(req.session.userId)
        .exec(function (error, user) {
        if (error) {
@@ -126,7 +126,8 @@ var smtpTransport = mailer.createTransport({
             } else {
             toEmail = user.username;
          }
-               
+       });
+
        mailOptions={
            from: 'imperialdigital02@gmail.com', // sender address
            to : toEmail,//"aisha@imperialdigital.co.nz",//req.query.to,
