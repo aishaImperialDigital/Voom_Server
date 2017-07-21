@@ -21,7 +21,7 @@ var UserSchema = new mongoose.Schema({
   passwordConf: {
     type: String,
     required: true
-  }
+  },
   regoNumber: {
     type: String,
     required: true
