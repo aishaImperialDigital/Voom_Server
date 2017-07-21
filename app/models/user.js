@@ -21,7 +21,8 @@ var UserSchema = new mongoose.Schema({
   passwordConf: {
     type: String,
     required: true,
-  }
+  },
+  activated: Boolean
 });
 
 //authenticate input against database
