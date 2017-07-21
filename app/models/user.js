@@ -16,41 +16,12 @@ var UserSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: true
+    required: true,
   },
   passwordConf: {
     type: String,
-    required: true
-  },
-  regoNumber: {
-    type: String,
-    required: true
-  },
-  firstName: {
-    type: String,
-    required: true
-  },
-  lastName: {
-    type: String,
-    required: true
-  },
-  driverLicense: {
-    type: String,
     required: true,
-  },
-  customName: {
-    type: String,
-    required: true,
-  },
-  mobileNumber: {
-    type: String,
-    required: true,
-  },
-  dateOfBirth: Date,
-  active: Boolean,
-  created_at: Date,
-  updated_at: Date
-
+  }
 });
 
 //authenticate input against database
@@ -87,4 +58,5 @@ UserSchema.pre('save', function (next) {
 });
 
 
-module.exports = mongoose.model('User', UserSchema);
+var User = mongoose.model('User', UserSchema);
+module.exports = User;
