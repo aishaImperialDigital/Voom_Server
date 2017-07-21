@@ -1,7 +1,7 @@
 'use strict';
 
 
-var User = require('./models/user');
+var User = require('./app/models/user');
 
 exports.list_all_users = function(req, res) {
   User.find({}, function(err, user) {
