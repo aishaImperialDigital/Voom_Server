@@ -112,9 +112,24 @@ var smtpTransport = mailer.createTransport({
    rand=Math.floor((Math.random() * 100) + 54);
        host=req.get('host');
        link="http://"+req.get('host')+"/verify?id="+rand;
+       //
+       var toEmail = ""
+       User.findById(req.session.userId)
+       .exec(function (error, user) {
+       if (error) {
+         return next(error);
+       } else {
+         if (user === null) {
+             var err = new Error('Not authorized! Go back!');
+             err.status = 400;
+             return next(err);
+            } else {
+            toEmail = user.username;
+         }
+               
        mailOptions={
            from: 'imperialdigital02@gmail.com', // sender address
-           to : req.query.to,//"aisha@imperialdigital.co.nz",//req.query.to,
+           to : toEmail,//"aisha@imperialdigital.co.nz",//req.query.to,
            subject : "Please confirm your Email account",
            html : "Hello,<br> Please Click on the link to verify your email.<br><a href="+link+">Click here to verify</a>"
        }
