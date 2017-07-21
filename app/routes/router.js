@@ -34,8 +34,7 @@ router.post('/', function (req, res, next) {
         return next(error);
       } else {
         req.session.userId = user._id;
-
-        return res.redirect('/profile');
+        return res.redirect('/send');
       }
     });
 
@@ -90,25 +89,6 @@ router.get('/logout', function (req, res, next) {
 });
 
 router.get('/send',function(req,res){
-//         rand=Math.floor((Math.random() * 100) + 54);
-//     host=req.get('host');
-//     link="http://"+req.get('host')+"/verify?id="+rand;
-//     mailOptions={
-//         from: 'imperialdigital02@gmail.com', // sender address
-//         to : "aisha@imperialdigital.co.nz",//req.query.to,
-//         subject : "Please confirm your Email account",
-//         html : "Hello,<br> Please Click on the link to verify your email.<br><a href="+link+">Click here to verify</a>"
-//     }
-//     console.log(mailOptions);
-//     transporter.sendMail(mailOptions, function(error, response){
-//      if(error){
-//             console.log(error);
-//         res.end("error");
-//      }else{
-//             console.log("Message sent: " + response.message);
-//         res.end("sent");
-//          }
-// });
 var mailer = require("nodemailer");
 // Use Smtp Protocol to send Email
 var smtpTransport = mailer.createTransport({
@@ -118,7 +98,6 @@ var smtpTransport = mailer.createTransport({
            pass: 'Imperial01!!' // Your password
        }
    });
-
    rand=Math.floor((Math.random() * 100) + 54);
        host=req.get('host');
        link="http://"+req.get('host')+"/verify?id="+rand;
@@ -129,7 +108,7 @@ var smtpTransport = mailer.createTransport({
            html : "Hello,<br> Please Click on the link to verify your email.<br><a href="+link+">Click here to verify</a>"
        }
        console.log(mailOptions);
-smtpTransport.sendMail(mailOptions, function(error, response){
+  smtpTransport.sendMail(mailOptions, function(error, response){
   if(error){
               console.log(error);
           res.end("error");
@@ -140,7 +119,6 @@ smtpTransport.sendMail(mailOptions, function(error, response){
     smtpTransport.close();
 });
 });
-
 
 router.get('/verify',function(req,res){
 console.log(req.protocol+":/"+req.get('host'));
