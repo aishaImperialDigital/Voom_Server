@@ -54,7 +54,7 @@ router.post('/', function (req, res, next) {
           if(user.activated == true)
            return res.redirect('/profile');
            else {
-             var err = new Error('user not activated yet.');
+             var err = new Error('User not activated yet. Please check your e-mail for verification link');
              err.status = 402;
              return next(err);
            }
@@ -114,7 +114,7 @@ var smtpTransport = mailer.createTransport({
        link="http://"+req.get('host')+"/verify?id="+rand;
        mailOptions={
            from: 'imperialdigital02@gmail.com', // sender address
-           to : "aisha@imperialdigital.co.nz",//req.query.to,
+           to : req.query.to,//"aisha@imperialdigital.co.nz",//req.query.to,
            subject : "Please confirm your Email account",
            html : "Hello,<br> Please Click on the link to verify your email.<br><a href="+link+">Click here to verify</a>"
        }
@@ -125,7 +125,7 @@ var smtpTransport = mailer.createTransport({
           res.end("error");
        }else{
               console.log("Message sent: " + response.message);
-          res.end("sent");
+          res.end("Verification email has been sent. Please check your e-mail for verification link");
            }
     smtpTransport.close();
 });
@@ -139,7 +139,7 @@ if((req.protocol+"://"+req.get('host'))==("http://"+host))
     if(req.query.id==rand)
     {
         console.log("email is verified");
-        res.end("<h1>Email "+mailOptions.to+" is been Successfully verified");
+        res.end("<h1>Email "+mailOptions.to+" is been Successfully verified</h1>");
         //modify user
 
         // find the user starlord55
