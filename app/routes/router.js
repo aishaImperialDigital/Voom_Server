@@ -112,38 +112,22 @@ var smtpTransport = mailer.createTransport({
    rand=Math.floor((Math.random() * 100) + 54);
        host=req.get('host');
        link="http://"+req.get('host')+"/verify?id="+rand;
-       //
-       var toEmail ='';
-       User.findById(req.session.userId)
-       .exec(function (error, user) {
-       if (error) {
-         return next(error);
-       } else {
-         if (user === null) {
-             var err = new Error('Not authorized! Go back!');
-             err.status = 400;
-             return next(err);
-            } else {
-            toEmail = user.username;
-         }
-       });
-
        mailOptions={
            from: 'imperialdigital02@gmail.com', // sender address
-           to : toEmail,//"aisha@imperialdigital.co.nz",//req.query.to,
+           to : "aisha@imperialdigital.co.nz",//req.query.to,
            subject : "Please confirm your Email account",
            html : "Hello,<br> Please Click on the link to verify your email.<br><a href="+link+">Click here to verify</a>"
        }
        console.log(mailOptions);
   smtpTransport.sendMail(mailOptions, function(error, response){
   if(error){
-              console.log(error);
+          console.log(error);
           res.end("error");
        }else{
-              console.log("Message sent: " + response.message);
+          console.log("Message sent: " + response.message);
           res.end("Verification email has been sent. Please check your e-mail for verification link");
            }
-    smtpTransport.close();
+  smtpTransport.close();
 });
 });
 
@@ -157,24 +141,20 @@ if((req.protocol+"://"+req.get('host'))==("http://"+host))
         console.log("email is verified");
         res.end("<h1>Email "+mailOptions.to+" is been Successfully verified</h1>");
         //modify user
-
-        // find the user starlord55
-  // update him to starlord 88
-  User.findOneAndUpdate({ email: mailOptions.to }, { activated: true }, function(err, user) {
-    if (err) throw err;
-
-    // we have the updated user returned to us
-    console.log(user);
-  });
-
-        //
-
-    }
-    else
-    {
-        console.log("email is not verified");
-        res.end("<h1>Bad Request</h1>");
-    }
+        // find the user
+        // update him to activated
+        User.findOneAndUpdate({ email: mailOptions.to }, { activated: true }, function(err, user) {
+          if (err) throw err;
+          // we have the updated user returned to us
+          console.log(user);
+           });
+              //
+          }
+          else
+          {
+              console.log("email is not verified");
+              res.end("<h1>Bad Request</h1>");
+          }
 }
 else
 {
