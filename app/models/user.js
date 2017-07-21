@@ -16,12 +16,40 @@ var UserSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: true,
+    required: true
   },
   passwordConf: {
     type: String,
-    required: true,
+    required: true
   }
+  regoNumber: {
+    type: String,
+    required: true
+  },
+  firstName: {
+    type: String,
+    required: true
+  },
+  lastName: {
+    type: String,
+    required: true
+  },
+  driverLicense: {
+    type: String,
+    required: true,
+  },
+  customName: {
+    type: String,
+    required: true,
+  },
+  mobileNumber: {
+    type: String,
+    required: true,
+  },
+  dateOfBirth: Date,
+  active: Boolean,
+  created_at: Date,
+  updated_at: Date
 
 });
 
