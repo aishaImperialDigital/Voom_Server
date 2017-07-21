@@ -132,6 +132,19 @@ if((req.protocol+"://"+req.get('host'))==("http://"+host))
     {
         console.log("email is verified");
         res.end("<h1>Email "+mailOptions.to+" is been Successfully verified");
+        //modify user
+
+        // find the user starlord55
+  // update him to starlord 88
+  User.findOneAndUpdate({ email: mailOptions.to }, { activated: true }, function(err, user) {
+    if (err) throw err;
+
+    // we have the updated user returned to us
+    console.log(user);
+  });
+
+        //
+
     }
     else
     {
