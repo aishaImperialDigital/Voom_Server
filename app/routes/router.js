@@ -47,9 +47,17 @@ router.post('/', function (req, res, next) {
         var err = new Error('Wrong email or password.');
         err.status = 401;
         return next(err);
-      } else {
-        req.session.userId = user._id;
-        return res.redirect('/profile');
+      }
+
+      else {
+          req.session.userId = user._id;
+          if(user.activated == true)
+           return res.redirect('/profile');
+           else {
+             var err = new Error('user not activated yet.');
+             err.status = 402;
+             return next(err);
+           }
       }
     });
   } else {
