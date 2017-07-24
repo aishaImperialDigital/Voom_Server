@@ -22,6 +22,27 @@ var UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  regoNumber: {
+    type: String,
+  },
+  firstName: {
+    type: String,
+  },
+  lastName: {
+    type: String,
+  },
+  licenseNumber: {
+    type: String,
+  },
+  dateOfBirth: {
+    type: String,
+  },
+  customVehicleName: {
+    type: String,
+  },
+  mobileNumber: {
+    type: String,
+  },
   activated: Boolean
 });
 

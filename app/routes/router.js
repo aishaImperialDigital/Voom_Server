@@ -30,6 +30,14 @@ router.post('/register', function (req, res, next) {
       password: req.body.password,
       passwordConf: req.body.passwordConf,
       activated: false
+      regoNumber: req.body.regoNumber
+      firstName: req.body.firstName
+      lastName: req.body.lastName
+      licenseNumber: req.body.licenseNumber
+      dateOfBirth: req.body.dateOfBirth
+      customVehicleName: req.body.customVehicleName
+      mobileNumber: req.body.mobileNumber
+
     }
 
     User.create(userData, function (error, user) {
@@ -93,7 +101,7 @@ router.get('/logout', function (req, res, next) {
       if (err) {
         return next(err);
       } else {
-        return res.redirect('/');
+        return res.redirect('/register');
       }
     });
   }
