@@ -12,6 +12,7 @@ router.get('/', function (req, res, next) {
 //POST route for updating data
 router.post('/register', function (req, res, next) {
   // confirm that user typed same password twice
+  console.log('registeration is called from mobile ');
   if (req.body.password !== req.body.passwordConf) {
     var err = new Error('Passwords do not match.');
     err.status = 400;
@@ -23,7 +24,7 @@ router.post('/register', function (req, res, next) {
     req.body.username &&
     req.body.password &&
     req.body.passwordConf) {
-    console.log('password and passwordConf and username and password ');
+
     var userData = {
       email: req.body.email,
       username: req.body.username,
