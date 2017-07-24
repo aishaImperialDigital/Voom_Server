@@ -69,7 +69,7 @@ router.post('/register', function (req, res, next) {
       }
     });
   } else {
-    var err = new Error('All fields required.');
+    var err = new Error('All fields required for reg');
     err.status = 400;
     return next(err);
   }
