@@ -24,7 +24,7 @@ router.post('/register', function (req, res, next) {
     req.body.username &&
     req.body.password &&
     req.body.passwordConf) {
-
+    console.log('parameters are coming');
     var userData = {
       email: req.body.email,
       username: req.body.username,
