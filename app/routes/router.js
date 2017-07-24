@@ -29,13 +29,13 @@ router.post('/register', function (req, res, next) {
       username: req.body.username,
       password: req.body.password,
       passwordConf: req.body.passwordConf,
-      activated: false
-      regoNumber: req.body.regoNumber
-      firstName: req.body.firstName
-      lastName: req.body.lastName
-      licenseNumber: req.body.licenseNumber
-      dateOfBirth: req.body.dateOfBirth
-      customVehicleName: req.body.customVehicleName
+      activated: false,
+      regoNumber: req.body.regoNumber,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      licenseNumber: req.body.licenseNumber,
+      dateOfBirth: req.body.dateOfBirth,
+      customVehicleName: req.body.customVehicleName,
       mobileNumber: req.body.mobileNumber
 
     }
