@@ -1,4 +1,5 @@
 var express = require('express');
+var logger = require('./logger');
 var router = express.Router();
 var User = require('../models/user');
 
@@ -23,7 +24,8 @@ router.post('/register', function (req, res, next) {
     req.body.username &&
     req.body.password &&
     req.body.passwordConf) {
-
+      logger.log('info', 'Everything started properly.');
+      logger.log('warn', 'Running out of memory...');
     var userData = {
       email: req.body.email,
       username: req.body.username,
